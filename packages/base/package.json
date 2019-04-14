@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@lary/overlay": "^1.0.0",
+    "@lary/overlays-v1": "^1.0.0",
     "classnames": "^2.2.6",
     "core-js": "^2.6.5",
     "less": "^3.9.0",
