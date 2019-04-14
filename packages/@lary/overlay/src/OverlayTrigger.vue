@@ -1,6 +1,5 @@
 <template>
   <div class="trigger">
-    {{ activeKey }}
     <slot name="trigger"/>
   </div>
 </template>
