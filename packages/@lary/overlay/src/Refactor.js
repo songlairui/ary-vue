@@ -1,24 +1,7 @@
-import Vue from 'vue'
 import get from 'lodash/get'
 import OverlayContent from './OverlayContent'
 import OverlayTrigger from './OverlayTrigger'
 import { filterEmpty } from './_utils/props-util'
-
-function wrapTrigger(h, context, child, payload, key) {
-  return h(
-    'span',
-    {
-      key,
-      slot: 'trigger',
-      on: {
-        click() {
-          context.listeners.toggle(payload)
-        }
-      }
-    },
-    child
-  )
-}
 
 export default {
   functional: true,
@@ -40,7 +23,13 @@ export default {
       const overType = get(vNode, 'componentOptions.propsData.type')
       if (label) {
         triggerChildren.push(
-          wrapTrigger(h, context, label, { key, overType }, key)
+          <span
+            key={key}
+            slot="trigger"
+            onClick={() => context.listeners.toggle({ key, overType })}
+          >
+            {label}
+          </span>
         )
       }
       const subChild = get(vNode, 'componentOptions.children', [])
