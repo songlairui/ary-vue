@@ -1,0 +1,33 @@
+{
+  "name": "@lary/overlay",
+  "version": "1.0.0",
+  "description": "overlay functional",
+  "keywords": [
+    "functional",
+    "vue"
+  ],
+  "author": "songlairui <cnre@live.cn>",
+  "homepage": "http://songlairui.cn",
+  "license": "ISC",
+  "main": "lib/overlay.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/songlairui/ary-vue.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/songlairui/ary-vue/issues"
+  }
+}
