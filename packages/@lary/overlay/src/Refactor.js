@@ -36,7 +36,7 @@ export default {
           </span>
         )
       }
-      const subChild = get(vNode, 'componentOptions.children', [])
+      const subChild = filterEmpty(get(vNode, 'componentOptions.children', []))
       subChild.forEach((subVNode) => {
         if (subVNode.data && subVNode.data.slot === 'trigger') {
           subVNode.context = h('span').context // hacking
