@@ -5,7 +5,7 @@
       <overlay-pane tab="Tab 2" key="2" forceRender>Content of Tab Pane 2</overlay-pane>
       <overlay-pane key="3">
         <span slot="trigger" @click="hello">Tab 3</span>
-        Content of Tab Pane 3
+        <pane-c :hello="hello"/>
       </overlay-pane>
     </overlay>
   </div>
@@ -14,11 +14,13 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import PaneC from "./paneC";
 
 export default {
   name: "home",
   components: {
-    HelloWorld
+    HelloWorld,
+    PaneC
   },
   methods: {
     callback(e) {

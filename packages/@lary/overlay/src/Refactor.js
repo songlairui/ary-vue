@@ -26,7 +26,11 @@ export default {
           <span
             key={key}
             slot="trigger"
-            onClick={() => context.listeners.toggle({ key, overType })}
+            onClick={() => {
+              const payload = { key, overType }
+              context.listeners.toggle(payload)
+              context.parent.$emit('change', payload)
+            }}
           >
             {label}
           </span>
