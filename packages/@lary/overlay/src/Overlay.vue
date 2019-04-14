@@ -4,7 +4,6 @@
     @toggle="handleToggle"
     :activeKey="activeKey"
     :overType="overType"
-    :items="items"
   >
     <slot/>
   </Refactor>
@@ -32,23 +31,8 @@ export default {
       }
       this.activeKey = key;
       this.overType = overType;
-      console.warn("handleChange", key, overType, this);
-      Math.random() > 0.5 ? this.add() : this.remove();
-    },
-    randomIndex: function() {
-      return Math.floor(Math.random() * this.items.length);
-    },
-    add: function() {
-      this.items.splice(this.randomIndex(), 0, this.nextNum++);
-    },
-    remove: function() {
-      this.items.splice(this.randomIndex(), 1);
     }
   },
-  created() {
-    // setInterval(() => {
-    //   Math.random() > 0.5 ? this.add() : this.remove();
-    // }, 400);
-  }
+  created() {}
 };
 </script>

@@ -10,10 +10,6 @@ function wrapTrigger(h, context, child, payload, key) {
     {
       key,
       slot: 'trigger',
-      class: ['a'],
-      style: {
-        display: 'block'
-      },
       on: {
         click() {
           context.listeners.toggle(payload)
@@ -28,14 +24,12 @@ export default {
   functional: true,
   props: {
     activeKey: null,
-    overType: null,
-    items: Array
+    overType: null
   },
   render(h, context) {
     const children = filterEmpty(context.children)
     const triggerChildren = []
     const contentChildren = []
-    console.info('children', context)
     children.forEach((vNode, idx) => {
       if (!vNode.componentOptions) {
         console.info(vNode)
@@ -66,14 +60,9 @@ export default {
           // triggerChildren.push(wrapTrigger(h, context, [subVNode], key))
         } else {
           contentChildren.push(
-            h(
-              'div',
-              {
-                class: ['overlay-item', 'list-item'],
-                key
-              },
-              [subVNode]
-            )
+            <div class={['overlay-item', 'list-item']} key={key}>
+              {subVNode}
+            </div>
           )
         }
       })
@@ -93,66 +82,24 @@ export default {
         .slice(idx, idx + contentChildren.length)
     } else if (idx === -1) {
       reOrdered.unshift(
-        h(
-          'div',
-          {
-            class: ['overlay-item', 'list-item'],
-            key: 'blank'
-          },
-          '---'
-        )
+        <div class={['overlay-item', 'list-item']} key="blank" />
       )
-      console.warn('TODO')
     }
 
-    console.info(triggerChildren, reOrdered)
-    return h('div', context.data, [
-      h(OverlayTrigger, subCtxData, triggerChildren),
-      h(OverlayContent, subCtxData, [
-        h(
-          'transition-group',
-          {
-            props: {
-              name: 'list',
-              tag: 'p'
-            }
-          },
-          reOrdered
-        ),
-        h(
-          'transition',
-          { props: { name: 'fade' } },
-          context.props.activeKey === null
-            ? []
-            : [h('div', { class: 'mask' }, 'Content Bg Mask')]
-        ),
-        // <transition name="fade">
-        //   {context.props.activeKey !== null && (
-        //     <div class="mask">Content Bg Mask</div>
-        //   )}
-        // </transition>,
-        h(
-          'transition-group',
-          {
-            props: {
-              name: 'list',
-              tag: 'p'
-            }
-          },
-          context.props.items.map((item) =>
-            h('span', { key: item, class: 'list-item' }, item)
-          )
-        )
-        // <transition-group name="list" tag="p">
-        //   {context.props.items.map(function(item) {
-        //     return (
-        //       <span key={item} class="list-item">
-        //         {item}
-        //       </span>
-        //     )
-        //   })}
-        // </transition-group>
-      ])
-    ])
+    return (
+      <div {...context.data}>
+        <OverlayTrigger {...subCtxData}>{triggerChildren}</OverlayTrigger>
+        <OverlayContent {...subCtxData}>
+          <transition-group name="list" tag="p">
+            {reOrdered}
+          </transition-group>
+          <transition name="fade">
+            {context.props.activeKey !== null && (
+              <div class="mask">Content Bg Mask</div>
+            )}
+          </transition>
+        </OverlayContent>
+      </div>
+    )
   }
 }
