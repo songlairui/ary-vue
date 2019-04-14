@@ -1,18 +1,29 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <overlay defaultActiveKey="1" @change="callback">
+      <overlay-pane tab="Tab 1" key="1">Content of Tab Pane 1</overlay-pane>
+      <overlay-pane tab="Tab 2" key="2" forceRender>Content of Tab Pane 2</overlay-pane>
+      <overlay-pane key="3">
+        <span slot="trigger">Tab 3</span>
+        Content of Tab Pane 3
+      </overlay-pane>
+    </overlay>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     HelloWorld
+  },
+  methods: {
+    callback(e) {
+      console.info("callback", e);
+    }
   }
-}
+};
 </script>

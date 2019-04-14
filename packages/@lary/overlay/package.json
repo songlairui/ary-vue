@@ -9,7 +9,7 @@
   "author": "songlairui <cnre@live.cn>",
   "homepage": "http://songlairui.cn",
   "license": "ISC",
-  "main": "lib/overlay.js",
+  "main": "src/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -29,5 +29,8 @@
   },
   "bugs": {
     "url": "https://github.com/songlairui/ary-vue/issues"
+  },
+  "dependencies": {
+    "base": "^0.1.0"
   }
 }
