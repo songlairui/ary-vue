@@ -5,6 +5,9 @@
 </template>
 <script>
 export default {
-  name: "OverlayPane"
+  name: "OverlayPane",
+  props: {
+    type: null
+  }
 };
 </script>
