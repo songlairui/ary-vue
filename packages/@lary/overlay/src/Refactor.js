@@ -59,34 +59,31 @@ export default {
     const subCtxData = {
       props: { ...context.props }
     }
-    // <transition-group name="list" tag="p">
-    // reord contentChildren by activeKey
-    const idx = contentChildren.findIndex(
+
+    let reOrdered = [
+      <div class={['overlay-item', 'list-item', 'blank']} key="blank" />,
+      ...contentChildren
+    ]
+    // reord contentChildren by activeKey, activeKey 在第一个显示
+    const idx = reOrdered.findIndex(
       (vNode) => vNode.data.key === context.props.activeKey
     )
-    let reOrdered = [...contentChildren]
-    if (idx > 0) {
-      reOrdered = contentChildren
-        .concat(contentChildren)
-        .slice(idx, idx + contentChildren.length)
-    } else if (idx === -1) {
-      reOrdered.unshift(
-        <div class={['overlay-item', 'list-item']} key="blank" />
-      )
-    }
 
+    if (idx > 0) {
+      reOrdered = reOrdered.concat(reOrdered).slice(idx, idx + reOrdered.length)
+    }
     return (
       <div {...context.data}>
         <OverlayTrigger {...subCtxData}>{triggerChildren}</OverlayTrigger>
         <OverlayContent {...subCtxData}>
-          <transition-group name="list" tag="p">
+          <transition-group
+            class="group"
+            name="list"
+            tag="div"
+            style={context.props.activeKey === null && { display: 'none' }}
+          >
             {reOrdered}
           </transition-group>
-          <transition name="fade">
-            {context.props.activeKey !== null && (
-              <div class="mask">Content Bg Mask</div>
-            )}
-          </transition>
         </OverlayContent>
       </div>
     )
